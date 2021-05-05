@@ -1,4 +1,5 @@
 import { IconDefinition, SizeProp } from "@fortawesome/fontawesome-svg-core";
+import { categoryStateType, locationStateType } from "store/slices/types";
 import { ITheme } from "Theme";
 
 export type ThemedType = {
@@ -30,3 +31,8 @@ export interface IconCssTypes extends ThemedType {
   color: string;
   disabled?: boolean;
 }
+export type ListItemType = locationStateType | categoryStateType;
+
+export type ListTypes = {
+  itemsArray: Array<ListItemType>;
+};

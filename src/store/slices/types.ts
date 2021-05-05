@@ -3,7 +3,6 @@ import { PayloadAction } from "@reduxjs/toolkit";
 export type categoryStateType = {
   id: string;
   name: string;
-  addedDate: Date;
 };
 
 export interface coordinatesInterface {
@@ -25,5 +24,8 @@ export type StateType = {
   categories: categoryStateType[];
 };
 
+export type selectedItemType = locationStateType | categoryStateType;
+
+export type selectedItemActionType = PayloadAction<selectedItemType>;
 export type locationActionType = PayloadAction<locationStateType>;
 export type categoryActionType = PayloadAction<categoryStateType>;
