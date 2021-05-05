@@ -1,4 +1,5 @@
 import { Button } from "@material-ui/core";
+import { Title } from "components";
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -12,7 +13,7 @@ const Root = styled.div`
 
 const NotFound = () => (
   <Root>
-    <h1>"NOT FOUND" </h1>
+    <Title text="NOT FOUND" />
     <Link to="/">
       <Button variant="outlined" color="primary">
         RETURN TO DASHBOARD

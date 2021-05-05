@@ -1,3 +1,4 @@
+import { Title } from "components";
 import React from "react";
 import styled from "styled-components";
 
@@ -10,7 +11,7 @@ const Root = styled.div`
 
 const Dashboard = () => (
   <Root>
-    <h1>Location</h1>
+    <Title text="Locations" />
   </Root>
 );
 
