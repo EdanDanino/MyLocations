@@ -8,6 +8,7 @@ export type ThemedType = {
 export type TileTypes = {
   id: string;
   title: string;
+  onTryToSelectItem: () => boolean;
 };
 
 export type Disableable = {

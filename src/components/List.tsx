@@ -36,7 +36,12 @@ const List: FunctionComponent<ListTypes> = ({ itemsArray }) => {
         {itemsArray?.map((item: ListItemType) => {
           return (
             <ItemWrapper key={item.id}>
-              <Tile key={`${item.id}-key`} id={item.id} title={item.name} />
+              <Tile
+                key={`${item.id}-key`}
+                id={item.id}
+                title={item.name}
+                onTryToSelectItem={() => true} // If this statement is true , it means the selected item slot is full!
+              />
             </ItemWrapper>
           );
         })}

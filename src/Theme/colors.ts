@@ -15,6 +15,7 @@ const colors = {
   shadeOnTop: "#00000033",
   shadow: "rgba(51, 51, 51, 0.3)",
   overlay: " rgba(0, 0, 0, 0.7)",
+  selected: "red",
 };
 
 export default colors;

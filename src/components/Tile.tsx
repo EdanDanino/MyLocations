@@ -1,14 +1,22 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import styled from "styled-components";
 import { ITheme } from "Theme";
 import { TileTypes } from "./types";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isSelected: boolean }>`
   background: ${({ theme }: { theme: ITheme }) => theme.colors.primary};
   width: 200px;
   color: ${({ theme }: { theme: ITheme }) => theme.colors.white};
   font-size: 5px;
   border-radius: 3px;
+  box-shadow: ${({
+    isSelected,
+    theme,
+  }: {
+    isSelected: boolean;
+    theme: ITheme;
+  }) => (isSelected ? `0px 0px 20px ${theme.colors.selected}` : "none")};
+  transition: 0.8s all ease-in-out;
 `;
 
 const TileHeader = styled.div`
@@ -46,9 +54,23 @@ const ProgressBar = styled.div`
   width: 150px;
   height: 1px;
 `;
-const Tiles: FunctionComponent<TileTypes> = ({ id, title, children }) => {
+const Tiles: FunctionComponent<TileTypes> = ({
+  id,
+  title,
+  onTryToSelectItem,
+  children,
+}) => {
+  const [isSelected, SetIsSelecte] = useState(false);
   return (
-    <Wrapper key={id}>
+    <Wrapper
+      key={id}
+      isSelected={isSelected}
+      onClick={() => {
+        if (!onTryToSelectItem()) {
+          SetIsSelecte(!isSelected);
+        }
+      }}
+    >
       <TileHeader>
         <Title title={title}>{title}</Title>
       </TileHeader>
