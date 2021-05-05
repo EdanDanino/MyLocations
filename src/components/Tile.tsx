@@ -1,9 +1,18 @@
 import React, { FunctionComponent, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { ITheme } from "Theme";
 import { TileTypes } from "./types";
 
-const Wrapper = styled.div<{ isSelected: boolean }>`
+const shakeAnimation = keyframes`
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  20% { transform: translate(-1px, -2px) rotate(-1deg); }
+  40% { transform: translate(-3px, 0px) rotate(1deg); }
+  60% { transform: translate(3px, 2px) rotate(0deg); }
+  80% { transform: translate(1px, -1px) rotate(1deg); }
+  100% { transform: translate(-1px, 2px) rotate(-1deg); }
+`;
+
+const Wrapper = styled.div<{ isSelected: boolean; isShaked: boolean }>`
   background: ${({ theme }: { theme: ITheme }) => theme.colors.primary};
   width: 200px;
   color: ${({ theme }: { theme: ITheme }) => theme.colors.white};
@@ -17,6 +26,8 @@ const Wrapper = styled.div<{ isSelected: boolean }>`
     theme: ITheme;
   }) => (isSelected ? `0px 0px 20px ${theme.colors.selected}` : "none")};
   transition: 0.8s all ease-in-out;
+  animation: ${({ isShaked }) =>
+    isShaked ? `${shakeAnimation} infinate` : "none "};
 `;
 
 const TileHeader = styled.div`
@@ -61,13 +72,25 @@ const Tiles: FunctionComponent<TileTypes> = ({
   children,
 }) => {
   const [isSelected, SetIsSelecte] = useState(false);
+  const [isShaked, SetIsShaked] = useState(false);
+
+  const shakeComponent = () => {
+    SetIsShaked(true);
+    setTimeout(() => {
+      SetIsShaked(false);
+    }, 100);
+  };
+
   return (
     <Wrapper
       key={id}
       isSelected={isSelected}
+      isShaked={isShaked}
       onClick={() => {
         if (!onTryToSelectItem()) {
           SetIsSelecte(!isSelected);
+        } else {
+          shakeComponent();
         }
       }}
     >
