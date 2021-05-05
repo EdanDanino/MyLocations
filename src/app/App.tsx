@@ -5,6 +5,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { reduxStore } from "store";
 import styled from "styled-components";
 import AppRouter from "./AppRouter";
+import { Navbar } from "./components";
 
 const Root = styled.div`
   width: 100%;
@@ -20,12 +21,21 @@ const Page = styled.div`
 `;
 
 const App = () => {
+  const navLinks = [
+    {
+      title: `Categories`,
+    },
+    {
+      title: `Locations`,
+    },
+  ];
   return (
     <>
       <Provider store={reduxStore.store}>
         <PersistGate loading={null} persistor={reduxStore.persistor}>
           <BrowserRouter>
             <Root>
+              <Navbar navLinks={navLinks} />
               <Page>
                 <AppRouter />
               </Page>
