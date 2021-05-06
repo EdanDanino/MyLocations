@@ -3,11 +3,16 @@ import logger from "redux-logger";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
-import { categroyReducer, locationReducer } from "./slices";
+import {
+  categroyReducer,
+  locationReducer,
+  selectedItemReducer,
+} from "./slices";
 
 const rootReducer = combineReducers({
   locations: locationReducer,
   categories: categroyReducer,
+  selectedItem: selectedItemReducer,
 });
 
 const persistConfig = {

@@ -73,6 +73,7 @@ const Tiles: FunctionComponent<TileTypes> = ({
   id,
   title,
   onTryToSelectItem,
+  onClick,
   children,
 }) => {
   const [isSelected, SetIsSelecte] = useState(false);
@@ -92,6 +93,7 @@ const Tiles: FunctionComponent<TileTypes> = ({
       isShaked={isShaked}
       onClick={() => {
         if (!onTryToSelectItem()) {
+          onClick();
           SetIsSelecte(!isSelected);
         } else {
           shakeComponent();

@@ -22,6 +22,7 @@ export type locationKey = keyof locationStateType;
 export type StateType = {
   locations: locationStateType[];
   categories: categoryStateType[];
+  selectedItem: selectedItemType;
 };
 
 export type selectedItemType = locationStateType | categoryStateType;

@@ -10,11 +10,14 @@ const selectedItemReducer = createSlice({
     setSelectedItem: (state, action: selectedItemActionType) => {
       Object.assign(state, action.payload);
     },
-    clearSelectedItem: (state, action: selectedItemActionType) => {
+    clearSelectedItem: (state) => {
       Object.assign(state, null);
     },
   },
 });
 
-export const { setSelectedItem } = selectedItemReducer.actions;
+export const {
+  setSelectedItem,
+  clearSelectedItem,
+} = selectedItemReducer.actions;
 export default selectedItemReducer.reducer;
