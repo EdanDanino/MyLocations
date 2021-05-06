@@ -101,7 +101,7 @@ const Tiles: FunctionComponent<TileTypes> = ({ id, title, children }) => {
       onClick={() => {
         if (!flag) {
           shakeComponent();
-          dispatch(setSelectedItem(id.toString()));
+          dispatch(setSelectedItem(id));
         }
       }}
     >

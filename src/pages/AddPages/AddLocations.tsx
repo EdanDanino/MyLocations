@@ -1,13 +1,11 @@
 import { Form } from "components";
+import { v4 as uuid } from "uuid";
 import React from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addLocation } from "store/slices/location";
-import styled from "styled-components";
 import { StateType } from "store/slices/types";
-import _ from "lodash";
-import moment from "moment";
+import styled from "styled-components";
 
 const Root = styled.div`
   display: flex;
@@ -48,9 +46,8 @@ const AddLocations = () => {
   const onSubmit = (data: any) => {
     dispatch(
       addLocation({
-        id: _.uniqueId(),
+        id: uuid(),
         ...data,
-        addedDate: moment().toDate(),
       })
     );
     history.push("/Locations");

@@ -1,11 +1,10 @@
 import { Form } from "components";
+import { v4 as uuid } from "uuid";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addCategory } from "store/slices/category";
 import styled from "styled-components";
-import moment from "moment";
-import _ from "lodash";
 
 const Root = styled.div`
   display: flex;
@@ -25,9 +24,7 @@ const AddCategories = () => {
   const history = useHistory();
 
   const onSubmit = (data: any) => {
-    dispatch(
-      addCategory({ id: _.uniqueId(), ...data, addedDate: moment().toDate() })
-    );
+    dispatch(addCategory({ id: uuid(), ...data }));
     history.push("/Categories");
   };
   return (
