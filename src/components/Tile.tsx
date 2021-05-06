@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedItem } from "store/slices/selectedItem";
+import { clearSelectedItem, setSelectedItem } from "store/slices/selectedItem";
 import { StateType } from "store/slices/types";
 import styled, { css, keyframes } from "styled-components";
 import { ITheme } from "Theme";
@@ -89,19 +89,21 @@ const Tiles: FunctionComponent<TileTypes> = ({ id, title, children }) => {
     }, 1000);
   };
 
-  const flag = useMemo(() => {
+  const isStateEqualToItem = useMemo(() => {
     return selectedItem?.id === id;
   }, [selectedItem, id]);
 
   return (
     <Wrapper
       key={id}
-      isSelected={flag}
+      isSelected={isStateEqualToItem}
       isShaked={isShaked}
       onClick={() => {
-        if (!flag) {
+        if (!isStateEqualToItem) {
           shakeComponent();
           dispatch(setSelectedItem({ id: id }));
+        } else {
+          dispatch(clearSelectedItem());
         }
       }}
     >

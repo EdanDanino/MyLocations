@@ -16,6 +16,7 @@ import styled from "styled-components";
 import { navbarTypes } from "./types";
 import _ from "lodash";
 import { removeLocation } from "store/slices/location";
+import { clearSelectedItem } from "store/slices/selectedItem";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,14 +76,12 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
     if (route === "Categories") {
       if (findRecord) {
         dispatch(removeCategory(findRecord as categoryStateType));
-      } else {
-        console.log("UXish Error");
+        dispatch(clearSelectedItem());
       }
     } else {
       if (findRecord) {
         dispatch(removeLocation(findRecord as locationStateType));
-      } else {
-        console.log("UXish Error");
+        dispatch(clearSelectedItem());
       }
     }
   }, [dispatch, route, selectedItem.id, state]);
