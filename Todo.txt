@@ -1,7 +1,5 @@
-Finish the issue with adding selected item to store,
-finish the highlight mechnisem ,
-
-create edit pages.
-
-add more ux.
-
+fix the problem with the linkbutton 
+make a modal for the form ?
+change all navlinks to be normal buttons will also solve the first bug ,
+test everything 
+more ux

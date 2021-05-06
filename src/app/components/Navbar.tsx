@@ -1,12 +1,15 @@
-import { List, ListItem, ListItemText } from "@material-ui/core";
+import { Button, List, ListItem, ListItemText } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import _ from "lodash";
 import React, { FunctionComponent, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { removeCategory } from "store/slices/category";
+import { removeLocation } from "store/slices/location";
+import { clearSelectedItem } from "store/slices/selectedItem";
 import {
   categoryStateType,
   locationStateType,
@@ -14,9 +17,6 @@ import {
 } from "store/slices/types";
 import styled from "styled-components";
 import { navbarTypes } from "./types";
-import _ from "lodash";
-import { removeLocation } from "store/slices/location";
-import { clearSelectedItem } from "store/slices/selectedItem";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,12 +42,12 @@ const Root = styled.div`
   flex-grow: 1;
 `;
 
-const StyledLink = styled(Link)`
+const StyledButton = styled(Button)`
   background: transparent;
   border: none;
   text-decoration: none;
   text-transform: uppercase;
-  color: white;
+  color: white !important;
 `;
 
 const selector = (state: StateType) => ({
@@ -60,6 +60,8 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
   const pathname = useLocation().pathname;
   const { selectedItem, state } = useSelector(selector);
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const { title, navDisplayFlex } = classes;
 
   const route = useMemo(() => {
@@ -67,6 +69,14 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
   }, [pathname]);
 
   type stateKey = keyof typeof state;
+
+  const onEdit = useCallback(() => {
+    if (route === "Categories") {
+      history.push(`/Categories/Edit/${selectedItem.id}`);
+    } else {
+      history.push(`/Location/Edit/${selectedItem.id}`);
+    }
+  }, [history, route, selectedItem.id]);
 
   const onRemove = useCallback(() => {
     const stateIterator = route.toLocaleLowerCase() as stateKey;
@@ -86,10 +96,18 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
     }
   }, [dispatch, route, selectedItem.id, state]);
 
+  const onAdd = useCallback(() => {
+    if (route === "Categories") {
+      history.push(`/Categories/Add`);
+    } else {
+      history.push(`/Location/Add`);
+    }
+  }, [history, route, selectedItem.id]);
   const defaultNavLinks = useMemo(
     () => [
       {
         title: `Add`,
+        onClick: onAdd,
       },
       {
         title: `Remove`,
@@ -97,9 +115,10 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
       },
       {
         title: `Edit`,
+        onClick: onEdit,
       },
     ],
-    [onRemove]
+    [onEdit, onRemove]
   );
 
   const filteredNavs = useMemo(() => {
@@ -133,15 +152,11 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
             {pathname !== "/" &&
               filteredNavs.map(({ title, onClick }) => {
                 return (
-                  <StyledLink
-                    key={title}
-                    to={`/${pathname.split("/")[1]}/${title}`}
-                    onClick={onClick}
-                  >
-                    <ListItem button>
+                  <StyledButton key={title} onClick={onClick}>
+                    <ListItem>
                       <ListItemText primary={title} />
                     </ListItem>
-                  </StyledLink>
+                  </StyledButton>
                 );
               })}
           </List>
