@@ -1,7 +1,6 @@
 import { IconDefinition, SizeProp } from "@fortawesome/fontawesome-svg-core";
 import { categoryStateType, locationStateType } from "store/slices/types";
 import { ITheme } from "Theme";
-
 export type ThemedType = {
   theme: ITheme;
 };

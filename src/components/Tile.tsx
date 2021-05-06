@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedItem } from "store/slices/selectedItem";
 import { StateType } from "store/slices/types";
-import styled, { keyframes, css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { ITheme } from "Theme";
 import { TileTypes } from "./types";
 
@@ -79,6 +80,7 @@ const selector = (state: StateType) => ({
 const Tiles: FunctionComponent<TileTypes> = ({ id, title, children }) => {
   const [isShaked, SetIsShaked] = useState(false);
   const { selectedItem } = useSelector(selector);
+  const dispatch = useDispatch();
 
   const shakeComponent = () => {
     SetIsShaked(true);
@@ -99,6 +101,7 @@ const Tiles: FunctionComponent<TileTypes> = ({ id, title, children }) => {
       onClick={() => {
         if (!flag) {
           shakeComponent();
+          dispatch(setSelectedItem(id.toString()));
         }
       }}
     >

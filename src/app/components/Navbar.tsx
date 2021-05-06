@@ -60,6 +60,8 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
     }
   }, [navLinks, selectedItem]);
 
+  console.log(navLinks.filter((nl) => nl.title === "Add"));
+
   return (
     <Root>
       <AppBar position="static">

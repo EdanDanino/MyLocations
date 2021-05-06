@@ -1,17 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { selectedItemActionType, selectedItemType } from "./types";
 
-const initialState: selectedItemType = {} as selectedItemType;
+const initialState: selectedItemType = null;
 
 const selectedItemReducer = createSlice({
   name: "selectedItem",
   initialState,
   reducers: {
     setSelectedItem: (state, action: selectedItemActionType) => {
-      Object.assign(state, action.payload);
+      if (state === typeof {}) {
+        Object.assign(state, action.payload);
+      } else {
+        // state = action.payload as selectedItemType;
+      }
     },
     clearSelectedItem: (state) => {
-      Object.assign(state, null);
+      if (state === typeof {}) {
+        Object.assign(state, null);
+      }
     },
   },
 });
