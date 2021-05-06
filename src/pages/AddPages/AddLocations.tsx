@@ -6,8 +6,7 @@ import { useHistory } from "react-router-dom";
 import { addLocation } from "store/slices/location";
 import styled from "styled-components";
 import { StateType } from "store/slices/types";
-
-import { v4 as uuid } from "uuid";
+import _ from "lodash";
 import moment from "moment";
 
 const Root = styled.div`
@@ -49,7 +48,7 @@ const AddLocations = () => {
   const onSubmit = (data: any) => {
     dispatch(
       addLocation({
-        id: uuid(),
+        id: _.uniqueId(),
         ...data,
         addedDate: moment().toDate(),
       })

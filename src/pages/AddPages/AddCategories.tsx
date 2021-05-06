@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addCategory } from "store/slices/category";
 import styled from "styled-components";
-import { v4 as uuid } from "uuid";
 import moment from "moment";
+import _ from "lodash";
 
 const Root = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ const AddCategories = () => {
 
   const onSubmit = (data: any) => {
     dispatch(
-      addCategory({ id: uuid(), ...data, addedDate: moment().toDate() })
+      addCategory({ id: _.uniqueId(), ...data, addedDate: moment().toDate() })
     );
     history.push("/Categories");
   };

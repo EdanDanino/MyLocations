@@ -1,5 +1,4 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { v4 } from "uuid";
 
 export type categoryStateType = {
   id: string;
@@ -26,7 +25,7 @@ export type StateType = {
   selectedItem: selectedItemType;
 };
 
-export type selectedItemType = string | typeof v4 | null;
+export type selectedItemType = string | null;
 
 export type selectedItemActionType = PayloadAction<selectedItemType>;
 export type locationActionType = PayloadAction<locationStateType>;
