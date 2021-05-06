@@ -100,7 +100,7 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
     if (route === "Categories") {
       history.push(`/Categories/Add`);
     } else {
-      history.push(`/Location/Add`);
+      history.push(`/Locations/Add`);
     }
   }, [history, route]);
 
