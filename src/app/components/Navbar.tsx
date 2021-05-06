@@ -72,7 +72,7 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
     const findRecord = _.find(state[stateIterator], (o: { id: string }) => {
       return o.id === selectedItem.id;
     });
-    if (route === "categories") {
+    if (route === "Categories") {
       if (findRecord) {
         dispatch(removeCategory(findRecord as categoryStateType));
       } else {
