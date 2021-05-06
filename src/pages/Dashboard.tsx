@@ -11,7 +11,7 @@ const Root = styled.div`
 
 const Dashboard = () => (
   <Root>
-    <Title text="Locations" />
+    <Title text="My Locations" />
   </Root>
 );
 
