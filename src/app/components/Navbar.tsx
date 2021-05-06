@@ -56,12 +56,9 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
     if (!selectedItem) {
       return navLinks.filter((nl) => nl.title === "Add");
     } else {
-      console.log(selectedItem);
       return navLinks.filter((nl) => nl.title !== "Add");
     }
   }, [navLinks, selectedItem]);
-
-  console.log(filteredNavs);
 
   return (
     <Root>

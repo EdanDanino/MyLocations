@@ -1,4 +1,6 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
+import { StateType } from "store/slices/types";
 import styled, { keyframes, css } from "styled-components";
 import { ITheme } from "Theme";
 import { TileTypes } from "./types";
@@ -69,15 +71,14 @@ const ProgressBar = styled.div`
   width: 150px;
   height: 1px;
 `;
-const Tiles: FunctionComponent<TileTypes> = ({
-  id,
-  title,
-  onTryToSelectItem,
-  onClick,
-  children,
-}) => {
-  const [isSelected, SetIsSelecte] = useState(false);
+
+const selector = (state: StateType) => ({
+  selectedItem: state.selectedItem,
+});
+
+const Tiles: FunctionComponent<TileTypes> = ({ id, title, children }) => {
   const [isShaked, SetIsShaked] = useState(false);
+  const { selectedItem } = useSelector(selector);
 
   const shakeComponent = () => {
     SetIsShaked(true);
@@ -86,16 +87,17 @@ const Tiles: FunctionComponent<TileTypes> = ({
     }, 1000);
   };
 
+  const flag = useMemo(() => {
+    return selectedItem === id;
+  }, [selectedItem, id]);
+
   return (
     <Wrapper
       key={id}
-      isSelected={isSelected}
+      isSelected={flag}
       isShaked={isShaked}
       onClick={() => {
-        if (!onTryToSelectItem()) {
-          onClick();
-          SetIsSelecte(!isSelected);
-        } else {
+        if (!flag) {
           shakeComponent();
         }
       }}

@@ -25,7 +25,7 @@ export type StateType = {
   selectedItem: selectedItemType;
 };
 
-export type selectedItemType = locationStateType | categoryStateType;
+export type selectedItemType = string; // Saving only the ID
 
 export type selectedItemActionType = PayloadAction<selectedItemType>;
 export type locationActionType = PayloadAction<locationStateType>;
