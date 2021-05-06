@@ -38,3 +38,20 @@ export type ListItemType = locationStateType | categoryStateType;
 export type ListTypes = {
   itemsArray: Array<ListItemType>;
 };
+
+export type FieldsType = {
+  name: string;
+  label?: string;
+  type?: string;
+  inputType?: string;
+  onChange?: () => void;
+  isFieldASelect?: Boolean;
+  options?: categoryStateType[];
+};
+
+export interface FormTypes {
+  onSubmit: (data: {}) => void;
+  fields: FieldsType[];
+  initialValues?: ListItemType;
+  buttonText?: string;
+}

@@ -3,8 +3,10 @@ import AppBar from "@material-ui/core/AppBar";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useMemo } from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { StateType } from "store/slices/types";
 import styled from "styled-components";
 import { navbarTypes } from "./types";
 
@@ -40,13 +42,26 @@ const StyledLink = styled(Link)`
   color: white;
 `;
 
+const selector = (state: StateType) => ({
+  selectedItem: state.selectedItem,
+});
+
 const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
   const classes = useStyles();
   const pathname = useLocation().pathname;
-
+  const { selectedItem } = useSelector(selector);
   const { title, navDisplayFlex } = classes;
 
-  console.log(pathname);
+  const filteredNavs = useMemo(() => {
+    if (!selectedItem) {
+      return navLinks.filter((nl) => nl.title === "Add");
+    } else {
+      console.log(selectedItem);
+      return navLinks.filter((nl) => nl.title !== "Add");
+    }
+  }, [navLinks, selectedItem]);
+
+  console.log(filteredNavs);
 
   return (
     <Root>
@@ -61,7 +76,7 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
             className={navDisplayFlex}
           >
             {pathname !== "/" &&
-              navLinks.map(({ title }) => {
+              filteredNavs.map(({ title }) => {
                 return (
                   <StyledLink
                     key={title}
