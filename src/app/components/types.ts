@@ -3,5 +3,5 @@ export type navLinksType = {
   onClick?: () => void;
 };
 export type navbarTypes = {
-  navLinks: navLinksType[];
+  navLinks?: navLinksType[];
 };

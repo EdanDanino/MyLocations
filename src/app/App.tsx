@@ -21,24 +21,13 @@ const Page = styled.div`
 `;
 
 const App = () => {
-  const navLinks = [
-    {
-      title: `Add`,
-    },
-    {
-      title: `Remove`,
-    },
-    {
-      title: `Edit`,
-    },
-  ];
   return (
     <>
       <Provider store={reduxStore.store}>
         <PersistGate loading={null} persistor={reduxStore.persistor}>
           <BrowserRouter>
             <Root>
-              <Navbar navLinks={navLinks} />
+              <Navbar />
               <Page>
                 <AppRouter />
               </Page>
