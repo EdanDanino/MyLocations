@@ -1,9 +1,8 @@
 import React from "react";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { reduxStore } from "store";
-import { clearSelectedItem } from "store/slices/selectedItem";
 import styled from "styled-components";
 import AppRouter from "./AppRouter";
 import { Footer, Navbar } from "./components";
@@ -22,7 +21,6 @@ const Page = styled.div`
 `;
 
 const App = () => {
-  const dispatch = useDispatch();
   const navLinks = [
     {
       title: `Add`,
@@ -34,7 +32,6 @@ const App = () => {
       title: `Edit`,
     },
   ];
-  dispatch(clearSelectedItem());
   return (
     <>
       <Provider store={reduxStore.store}>

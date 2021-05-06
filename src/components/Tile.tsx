@@ -90,7 +90,7 @@ const Tiles: FunctionComponent<TileTypes> = ({ id, title, children }) => {
   };
 
   const flag = useMemo(() => {
-    return selectedItem === id;
+    return selectedItem?.id === id;
   }, [selectedItem, id]);
 
   return (
@@ -101,7 +101,7 @@ const Tiles: FunctionComponent<TileTypes> = ({ id, title, children }) => {
       onClick={() => {
         if (!flag) {
           shakeComponent();
-          dispatch(setSelectedItem(id));
+          dispatch(setSelectedItem({ id: id }));
         }
       }}
     >

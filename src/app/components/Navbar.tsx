@@ -53,7 +53,7 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
   const { title, navDisplayFlex } = classes;
 
   const filteredNavs = useMemo(() => {
-    if (!selectedItem) {
+    if (!selectedItem.id) {
       return navLinks.filter((nl) => nl.title === "Add");
     } else {
       return navLinks.filter((nl) => nl.title !== "Add");

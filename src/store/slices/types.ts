@@ -25,7 +25,7 @@ export type StateType = {
   selectedItem: selectedItemType;
 };
 
-export type selectedItemType = string | null;
+export type selectedItemType = { id: string };
 
 export type selectedItemActionType = PayloadAction<selectedItemType>;
 export type locationActionType = PayloadAction<locationStateType>;
