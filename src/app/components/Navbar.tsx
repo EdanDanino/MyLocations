@@ -102,7 +102,8 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
     } else {
       history.push(`/Location/Add`);
     }
-  }, [history, route, selectedItem.id]);
+  }, [history, route]);
+
   const defaultNavLinks = useMemo(
     () => [
       {
@@ -118,7 +119,7 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
         onClick: onEdit,
       },
     ],
-    [onEdit, onRemove]
+    [onAdd, onEdit, onRemove]
   );
 
   const filteredNavs = useMemo(() => {
