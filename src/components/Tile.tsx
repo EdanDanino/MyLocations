@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { ITheme } from "Theme";
 import { TileTypes } from "./types";
 
@@ -27,7 +27,11 @@ const Wrapper = styled.div<{ isSelected: boolean; isShaked: boolean }>`
   }) => (isSelected ? `0px 0px 20px ${theme.colors.selected}` : "none")};
   transition: 0.8s all ease-in-out;
   animation: ${({ isShaked }) =>
-    isShaked ? `${shakeAnimation} infinate` : "none "};
+    isShaked
+      ? css`
+          ${shakeAnimation} 0.8s
+        `
+      : "none"};
 `;
 
 const TileHeader = styled.div`
@@ -78,7 +82,7 @@ const Tiles: FunctionComponent<TileTypes> = ({
     SetIsShaked(true);
     setTimeout(() => {
       SetIsShaked(false);
-    }, 100);
+    }, 1000);
   };
 
   return (
