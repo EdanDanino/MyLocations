@@ -4,7 +4,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import React, { FunctionComponent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { navbarTypes } from "./types";
 
@@ -42,8 +42,11 @@ const StyledLink = styled(Link)`
 
 const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
   const classes = useStyles();
+  const pathname = useLocation().pathname;
 
   const { title, navDisplayFlex } = classes;
+
+  console.log(pathname);
 
   return (
     <Root>
@@ -57,15 +60,19 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
             aria-labelledby="main navigation"
             className={navDisplayFlex}
           >
-            {navLinks.map(({ title }) => {
-              return (
-                <StyledLink key={title} to={`/${title}`}>
-                  <ListItem button>
-                    <ListItemText primary={title} />
-                  </ListItem>
-                </StyledLink>
-              );
-            })}
+            {pathname !== "/" &&
+              navLinks.map(({ title }) => {
+                return (
+                  <StyledLink
+                    key={title}
+                    to={`/${pathname.split("/")[1]}/${title}`}
+                  >
+                    <ListItem button>
+                      <ListItemText primary={title} />
+                    </ListItem>
+                  </StyledLink>
+                );
+              })}
           </List>
         </Toolbar>
       </AppBar>
