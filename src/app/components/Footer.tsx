@@ -20,8 +20,9 @@ const BottomPosition = styled.div`
 const StyledBottomNavigation = styled(BottomNavigation)`
   width: 500px;
   background-color: ${({ theme }: { theme: ITheme }) =>
-    theme.colors.darkGrey}!important;
+    theme.colors.lightGrey}!important;
   border-radius: 10px 10px 0 0;
+  border: 2px solid ${({ theme }: { theme: ITheme }) => theme.colors.secondary};
 `;
 
 const StyledLink = styled(Link)`
@@ -33,16 +34,11 @@ const StyledLink = styled(Link)`
 
 const FooterContent = () => {
   const pathname = useLocation().pathname;
-  // const history = useHistory();
   const [value, setValue] = useState(pathname);
 
   const handleChange = (event: ChangeEvent<{}>, newValue: string) => {
     setValue(newValue);
   };
-
-  // const route = useMemo(() => {
-  //   return pathname.split("/")[1];
-  // }, [pathname]);
 
   return (
     <StyledBottomNavigation value={value} onChange={handleChange}>
