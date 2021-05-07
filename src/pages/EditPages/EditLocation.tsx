@@ -1,5 +1,5 @@
 import { Form } from "components";
-import _ from "lodash";
+import { findPopulatedItem } from "pages/utils/findPopulatedItems";
 import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
@@ -52,9 +52,10 @@ const EditLocation = () => {
     return location?.pathname.split("/")[3];
   }, [location]);
 
-  const locationItem = _.find(locations, (o: { id: string }) => {
-    return o.id === itemId;
-  });
+  const locationItem = findPopulatedItem(
+    locations,
+    itemId
+  ) as locationStateType;
 
   const onSubmitEditLocation = (data: any) => {
     const newLocationWithUpdates = { ...data };

@@ -74,13 +74,16 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
 
   type stateKey = keyof typeof state;
 
-  const onEdit = useCallback(() => {
-    if (route === "Categories") {
-      history.push(`/Categories/Edit/${selectedItem.id}`);
-    } else {
-      history.push(`/Location/Edit/${selectedItem.id}`);
-    }
-  }, [history, route, selectedItem.id]);
+  const onEditorView = useCallback(
+    (whatRoute) => {
+      if (route === "Categories") {
+        history.push(`/Categories/${whatRoute}/${selectedItem.id}`);
+      } else {
+        history.push(`/Locations/${whatRoute}/${selectedItem.id}`);
+      }
+    },
+    [history, route, selectedItem.id]
+  );
 
   const onRemove = useCallback(() => {
     const stateIterator = route.toLocaleLowerCase() as stateKey;
@@ -111,6 +114,10 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
   const defaultNavLinks = useMemo(
     () => [
       {
+        title: `View`,
+        onClick: () => onEditorView("View"),
+      },
+      {
         title: `Add`,
         onClick: onAdd,
       },
@@ -120,10 +127,10 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
       },
       {
         title: `Edit`,
-        onClick: onEdit,
+        onClick: () => onEditorView("Edit"),
       },
     ],
-    [onAdd, onEdit, onRemove]
+    [onAdd, onEditorView, onRemove]
   );
 
   const filteredNavs = useMemo(() => {

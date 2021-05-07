@@ -1,5 +1,5 @@
 import { Form } from "components";
-import _ from "lodash";
+import { findPopulatedItem } from "pages/utils/findPopulatedItems";
 import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
@@ -35,10 +35,7 @@ const EditCategory = () => {
     return location?.pathname.split("/")[3];
   }, [location]);
 
-  const categoryItem =
-    _.find(categories, (o: { id: string }) => {
-      return o.id === itemId;
-    }) || categories;
+  const categoryItem = findPopulatedItem(categories, itemId);
 
   const onSubmitEditCategory = (data: any) => {
     const newCategoryWithUpdates = { ...categoryItem, ...data };
