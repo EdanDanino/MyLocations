@@ -65,6 +65,8 @@ const Form: FunctionComponent<FormTypes> = ({
   const { handleSubmit, control } = useForm();
   const [selectArray, setSelectArray] = useState<string[]>([]);
 
+  let hasSelect = false;
+
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSelectArray(event.target.value as string[]);
   };
@@ -83,9 +85,13 @@ const Form: FunctionComponent<FormTypes> = ({
   useEffect(() => {
     if (initialValues) {
       const cateogories: string = initialValues["category" as IntialValueKey];
-      setSelectArray(cateogories.split(","));
+      if (cateogories) {
+        setSelectArray(cateogories.split(","));
+      }
     }
-  }, [initialValues]);
+  }, [hasSelect, initialValues]);
+
+  //fix error when trying to split on category edtit
 
   return (
     <Container>
