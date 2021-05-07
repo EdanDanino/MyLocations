@@ -162,6 +162,8 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
             className={navDisplayFlex}
           >
             {pathname !== "/" &&
+              !pathname?.includes("View") &&
+              !pathname?.includes("Edit") &&
               filteredNavs.map(({ title, onClick }) => {
                 return (
                   <StyledButton key={title} onClick={onClick}>

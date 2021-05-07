@@ -5,8 +5,9 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core";
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useHistory, useLocation } from "react-router-dom";
 import { categoryStateType } from "store/slices/types";
 import styled, { css } from "styled-components";
 import { ITheme } from "Theme";
@@ -26,7 +27,9 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  width: 100%;
 `;
 
 const StyledForm = styled.form`
@@ -48,6 +51,7 @@ const StyledInput = styled(Input)`
 `;
 const Btn = styled(Button)`
   ${FieldsCss}
+  margin:5px 0 !important;
 `;
 
 const Column = styled.div`
@@ -64,8 +68,14 @@ const Form: FunctionComponent<FormTypes> = ({
 }) => {
   const { handleSubmit, control } = useForm();
   const [selectArray, setSelectArray] = useState<string[]>([]);
+  const history = useHistory();
+  const location = useLocation();
 
   let hasSelect = false;
+
+  const route = useMemo(() => {
+    return location.pathname.split("/")[1];
+  }, [location.pathname]);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSelectArray(event.target.value as string[]);
@@ -91,7 +101,7 @@ const Form: FunctionComponent<FormTypes> = ({
     }
   }, [hasSelect, initialValues]);
 
-  //fix error when trying to split on category edtit
+  console.log(location);
 
   return (
     <Container>
@@ -156,6 +166,16 @@ const Form: FunctionComponent<FormTypes> = ({
           <Wrapper>
             <Btn variant="outlined" color="primary" type="submit">
               {buttonText || initialValues ? "Edit" : "Add"}
+            </Btn>
+            <Btn
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                console.log(history);
+                history.push(`/${route}`);
+              }}
+            >
+              Return
             </Btn>
           </Wrapper>
         </StyledForm>
