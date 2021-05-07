@@ -41,17 +41,17 @@ const ItemWrapper = styled.div`
 
 const Information: FunctionComponent<InformationTypes> = ({ item }) => {
   const ObjectKeys = Object.keys(item);
-  type KeyType = keyof typeof item;
 
   return (
     <Wrapper>
       <Container>
         <h3>{item.name}</h3>
-        {ObjectKeys.map((key): { key: KeyType } => {
-          /*@ts-ignore*/
+        {ObjectKeys.map((key: keyof typeof item | string) => {
           return (
             <ItemWrapper>
-              <FieldWrapper>{`${key} : ${item[key as KeyType]}`}</FieldWrapper>
+              <FieldWrapper>{`${key} : ${
+                item[key as keyof typeof item]
+              }`}</FieldWrapper>
               <BlueLine />
             </ItemWrapper>
           );

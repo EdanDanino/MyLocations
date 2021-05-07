@@ -13,13 +13,14 @@ import { ITheme } from "Theme";
 import { FieldsType, FormTypes } from "./types";
 
 const Container = styled.div`
-  border: 2px solid ${({ theme }: { theme: ITheme }) => theme.colors.primary};
+  border: 2px solid ${({ theme }: { theme: ITheme }) => theme.colors.lightGrey};
   padding: 20px 50px;
   border-radius: 5px;
-  max-height: 70%;
-  box-shadow: 2px 4px 3px
+  min-height: 200px;
+  min-width: 200px;
+  box-shadow: 1px 1px 4px
     ${({ theme }: { theme: ITheme }) => theme.colors.shadow};
-  margin: 50px 0;
+  margin: 30px 0;
 `;
 
 const Wrapper = styled.div`
@@ -47,6 +48,7 @@ const StyledInpu = styled(Input)`
 `;
 const Btn = styled(Button)`
   ${FieldsCss}
+  x
 `;
 
 const Column = styled.div`
