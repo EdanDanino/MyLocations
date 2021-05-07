@@ -27,27 +27,6 @@ const ViewLocation = () => {
   const location = useLocation();
   const history = useHistory();
 
-  const fields = useMemo(
-    () => [
-      {
-        name: "name",
-      },
-      {
-        name: "address",
-      },
-      {
-        name: "lat",
-      },
-      {
-        name: "lng",
-      },
-      {
-        name: "category",
-      },
-    ],
-    []
-  );
-
   const itemId = useMemo(() => {
     return location?.pathname.split("/")[3];
   }, [location]);
@@ -59,7 +38,7 @@ const ViewLocation = () => {
 
   return (
     <Root>
-      <Information fields={fields} item={locationItem} />
+      <Information item={locationItem} />
       <StyledButton
         variant="outlined"
         color="primary"

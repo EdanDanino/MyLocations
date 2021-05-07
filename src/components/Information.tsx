@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { ITheme } from "Theme";
-import { InformationTypes, ListItemType } from "./types";
+import { InformationTypes } from "./types";
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ const Container = styled.div`
   min-width: 200px;
   box-shadow: 1px 1px 4px
     ${({ theme }: { theme: ITheme }) => theme.colors.shadow};
-  margin: auto;
+  margin: 30px 0;
 `;
 
 const FieldWrapper = styled.div`
@@ -28,7 +28,7 @@ const FieldWrapper = styled.div`
   letter-spacing: 1px;
 `;
 
-const WhiteLine = styled.div`
+const BlueLine = styled.div`
   height: 2px;
   margin: 0;
   display: block;
@@ -39,20 +39,20 @@ const ItemWrapper = styled.div`
   margin-top: 20px;
 `;
 
-const Information: FunctionComponent<InformationTypes> = ({ fields, item }) => {
+const Information: FunctionComponent<InformationTypes> = ({ item }) => {
   const ObjectKeys = Object.keys(item);
-  type KeyType = keyof ListItemType;
+  type KeyType = keyof typeof item;
+
   return (
     <Wrapper>
       <Container>
         <h3>{item.name}</h3>
-        {ObjectKeys?.map((key): { key: KeyType } => {
+        {ObjectKeys.map((key): { key: KeyType } => {
+          /*@ts-ignore*/
           return (
             <ItemWrapper>
-              <FieldWrapper key={`${item[key]}-key`}>
-                {`${key} : ${item[key]}`}{" "}
-              </FieldWrapper>
-              <WhiteLine />
+              <FieldWrapper>{`${key} : ${item[key as KeyType]}`}</FieldWrapper>
+              <BlueLine />
             </ItemWrapper>
           );
         })}

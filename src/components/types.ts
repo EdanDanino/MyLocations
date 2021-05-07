@@ -47,7 +47,6 @@ export type FieldsType = {
 };
 
 export type InformationTypes = {
-  fields: FieldsType[];
   item: ListItemType;
 };
 

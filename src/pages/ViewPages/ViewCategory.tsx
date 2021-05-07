@@ -23,12 +23,6 @@ const selector = (state: StateType) => ({
   categories: state.categories,
 });
 
-const fields = [
-  {
-    name: "name",
-  },
-];
-
 const ViewCategory = () => {
   const { categories } = useSelector(selector);
   const location = useLocation();
@@ -42,7 +36,7 @@ const ViewCategory = () => {
 
   return (
     <Root>
-      <Information fields={fields} item={categoryItem as ListItemType} />
+      <Information item={categoryItem as ListItemType} />
       <StyledButton
         variant="outlined"
         color="primary"
