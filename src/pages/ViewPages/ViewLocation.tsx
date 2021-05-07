@@ -1,19 +1,30 @@
 import { Button } from "@material-ui/core";
 import { findPopulatedItem } from "pages/utils/findPopulatedItems";
 import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { locationStateType, StateType } from "store/slices/types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Information } from "components";
+import { removeLocation } from "store/slices/location";
 
-const Root = styled.div`
+const WrapperCss = css`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const Root = styled.div`
+  ${WrapperCss}
   flex-direction: column;
 `;
 
+const BtnWrapper = styled.div`
+  ${WrapperCss}
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+`;
 const StyledButton = styled(Button)`
   margin: 20px 0;
 `;
@@ -26,6 +37,7 @@ const ViewLocation = () => {
   const { locations } = useSelector(selector);
   const location = useLocation();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const itemId = useMemo(() => {
     return location?.pathname.split("/")[3];
@@ -39,13 +51,25 @@ const ViewLocation = () => {
   return (
     <Root>
       <Information item={locationItem} />
-      <StyledButton
-        variant="outlined"
-        color="primary"
-        onClick={() => history.push("/Locations")}
-      >
-        Return to list
-      </StyledButton>
+      <BtnWrapper>
+        <StyledButton
+          variant="outlined"
+          color="primary"
+          onClick={() => history.push("/Locations")}
+        >
+          Return to list
+        </StyledButton>
+        <StyledButton
+          variant="contained"
+          color="secondary"
+          onClick={() => {
+            dispatch(removeLocation(locationItem));
+            history.push("/Categories");
+          }}
+        >
+          Delete
+        </StyledButton>
+      </BtnWrapper>
     </Root>
   );
 };
