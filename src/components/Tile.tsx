@@ -39,7 +39,6 @@ const Wrapper = styled.div<{ isSelected: boolean; isShaked: boolean }>`
 
 const TileHeader = styled.div`
   padding: 15px 20px 40px;
-  height: 50px;
 `;
 const Title = styled.div`
   text-align: center;

@@ -18,11 +18,10 @@ const BottomPosition = styled.div`
 `;
 
 const StyledBottomNavigation = styled(BottomNavigation)`
-  width: 500px;
-  background-color: ${({ theme }: { theme: ITheme }) =>
-    theme.colors.lightGrey}!important;
+  width: 336px;
   border-radius: 10px 10px 0 0;
   border: 2px solid ${({ theme }: { theme: ITheme }) => theme.colors.secondary};
+  height: 0;
 `;
 
 const StyledLink = styled(Link)`
@@ -43,6 +42,7 @@ const FooterContent = () => {
   return (
     <StyledBottomNavigation value={value} onChange={handleChange}>
       <BottomNavigationAction
+        showLabel
         label="Categories"
         value="Categories"
         component={StyledLink}
@@ -50,6 +50,7 @@ const FooterContent = () => {
         icon={<CategoryIcon />}
       />
       <BottomNavigationAction
+        showLabel
         label="Locations"
         value="Locations"
         component={StyledLink}

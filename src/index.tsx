@@ -7,11 +7,13 @@ import { reduxStore } from "./store";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import theme from "./Theme";
+import GlobalStyles from "Theme/GlobalStyles";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={reduxStore.store}>
       <ThemeProvider theme={theme}>
+        <GlobalStyles />
         <App />
       </ThemeProvider>
     </Provider>

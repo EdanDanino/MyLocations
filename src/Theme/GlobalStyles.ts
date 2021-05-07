@@ -52,7 +52,7 @@ export default createGlobalStyle`
 		font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		font-size: ${typography.texts.sizes.medium};
 		color: ${colors.text};
-		background-color: ${colors.backgroundGrey};
+		background-color: ${colors.backgroundGrey} !important;
 	}
 
 	#root {
