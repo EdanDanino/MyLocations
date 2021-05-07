@@ -8,7 +8,7 @@ const locationSlice = createSlice({
   initialState,
   reducers: {
     addLocation: (state, action: locationActionType) => {
-      state.push(action.payload);
+      return [...state, action.payload];
     },
     removeLocation: (state, action: locationActionType) => {
       return state.filter(({ id }: { id: string }) => {

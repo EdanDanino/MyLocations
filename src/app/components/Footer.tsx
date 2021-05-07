@@ -2,8 +2,8 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import CategoryIcon from "@material-ui/icons/Category";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import React, { ChangeEvent, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { ChangeEvent, useMemo, useState } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { ITheme } from "Theme";
 
@@ -33,10 +33,17 @@ const StyledLink = styled(Link)`
 
 const FooterContent = () => {
   const pathname = useLocation().pathname;
+  // const history = useHistory();
   const [value, setValue] = useState(pathname);
+
   const handleChange = (event: ChangeEvent<{}>, newValue: string) => {
     setValue(newValue);
   };
+
+  // const route = useMemo(() => {
+  //   return pathname.split("/")[1];
+  // }, [pathname]);
+
   return (
     <StyledBottomNavigation value={value} onChange={handleChange}>
       <BottomNavigationAction

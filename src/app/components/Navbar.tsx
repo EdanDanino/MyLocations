@@ -68,6 +68,10 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
     return pathname.split("/")[1];
   }, [pathname]);
 
+  history.listen(() => {
+    dispatch(clearSelectedItem());
+  });
+
   type stateKey = keyof typeof state;
 
   const onEdit = useCallback(() => {
