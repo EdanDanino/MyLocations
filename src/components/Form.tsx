@@ -171,7 +171,6 @@ const Form: FunctionComponent<FormTypes> = ({
               variant="outlined"
               color="primary"
               onClick={() => {
-                console.log(history);
                 history.push(`/${route}`);
               }}
             >

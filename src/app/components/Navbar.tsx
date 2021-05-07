@@ -164,6 +164,7 @@ const Navbar: FunctionComponent<navbarTypes> = ({ navLinks }) => {
             {pathname !== "/" &&
               !pathname?.includes("View") &&
               !pathname?.includes("Edit") &&
+              !pathname?.includes("Add") &&
               filteredNavs.map(({ title, onClick }) => {
                 return (
                   <StyledButton key={title} onClick={onClick}>
