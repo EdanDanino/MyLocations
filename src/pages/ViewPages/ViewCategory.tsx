@@ -15,6 +15,10 @@ const Root = styled.div`
   flex-direction: column;
 `;
 
+const StyledButton = styled(Button)`
+  margin: 20px 0;
+`;
+
 const selector = (state: StateType) => ({
   categories: state.categories,
 });
@@ -39,13 +43,13 @@ const ViewCategory = () => {
   return (
     <Root>
       <Information fields={fields} item={categoryItem as ListItemType} />
-      <Button
+      <StyledButton
         variant="outlined"
         color="primary"
         onClick={() => history.push("/Categories")}
       >
         Return to list
-      </Button>
+      </StyledButton>
     </Root>
   );
 };

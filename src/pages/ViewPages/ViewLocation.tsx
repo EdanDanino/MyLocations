@@ -14,6 +14,10 @@ const Root = styled.div`
   flex-direction: column;
 `;
 
+const StyledButton = styled(Button)`
+  margin: 20px 0;
+`;
+
 const selector = (state: StateType) => ({
   locations: state.locations,
 });
@@ -56,13 +60,13 @@ const ViewLocation = () => {
   return (
     <Root>
       <Information fields={fields} item={locationItem} />
-      <Button
+      <StyledButton
         variant="outlined"
         color="primary"
         onClick={() => history.push("/Locations")}
       >
         Return to list
-      </Button>
+      </StyledButton>
     </Root>
   );
 };

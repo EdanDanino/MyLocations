@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { ITheme } from "Theme";
-import { InformationTypes } from "./types";
+import { InformationTypes, ListItemType } from "./types";
 
 const Wrapper = styled.div`
   display: flex;
@@ -9,22 +9,54 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   user-select: none;
+  min-height: 400px;
 `;
 
 const Container = styled.div`
-  border: 2px solid ${({ theme }: { theme: ITheme }) => theme.colors.primary};
+  border: 2px solid ${({ theme }: { theme: ITheme }) => theme.colors.lightGrey};
   padding: 20px 50px;
   border-radius: 5px;
-  max-height: 70%;
-  box-shadow: 2px 4px 3px
+  min-height: 200px;
+  min-width: 200px;
+  box-shadow: 1px 1px 4px
     ${({ theme }: { theme: ITheme }) => theme.colors.shadow};
   margin: auto;
 `;
 
+const FieldWrapper = styled.div`
+  padding: 5px 0;
+  letter-spacing: 1px;
+`;
+
+const WhiteLine = styled.div`
+  height: 2px;
+  margin: 0;
+  display: block;
+  background: ${({ theme }: { theme: ITheme }) => theme.colors.primary};
+`;
+
+const ItemWrapper = styled.div`
+  margin-top: 20px;
+`;
+
 const Information: FunctionComponent<InformationTypes> = ({ fields, item }) => {
+  const ObjectKeys = Object.keys(item);
+  type KeyType = keyof ListItemType;
   return (
     <Wrapper>
-      <Container>{/* <div>{item}</div> */} hi</Container>
+      <Container>
+        <h3>{item.name}</h3>
+        {ObjectKeys?.map((key): { key: KeyType } => {
+          return (
+            <ItemWrapper>
+              <FieldWrapper key={`${item[key]}-key`}>
+                {`${key} : ${item[key]}`}{" "}
+              </FieldWrapper>
+              <WhiteLine />
+            </ItemWrapper>
+          );
+        })}
+      </Container>
     </Wrapper>
   );
 };

@@ -51,7 +51,6 @@ const Title = styled.div`
 `;
 const WhiteLine = styled.div`
   height: 2px;
-  background: ${({ theme }: { theme: ITheme }) => theme.colors.shadeOnTop};
   margin: 0;
   display: block;
   background: ${({ theme }: { theme: ITheme }) => theme.colors.white};
