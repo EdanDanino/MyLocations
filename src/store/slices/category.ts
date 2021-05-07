@@ -16,12 +16,9 @@ const categorySlice = createSlice({
       });
     },
     updateCategory: (state, action: categoryActionType) => {
-      const category = state.find(
-        (category) => category.id === action.payload.id
+      return state.map((category) =>
+        category.id === action.payload.id ? action.payload : category
       );
-      if (category) {
-        category.name = action.payload.name;
-      }
     },
   },
 });

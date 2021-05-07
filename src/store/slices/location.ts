@@ -16,13 +16,9 @@ const locationSlice = createSlice({
       });
     },
     updateLocation: (state, action: locationActionType) => {
-      const location = state.find(
-        (location) => location.id === action.payload.id
+      return state.map((location) =>
+        location.id === action.payload.id ? action.payload : location
       );
-      if (location) {
-        const mergedObj = { ...location, ...action.payload };
-        Object.assign(location, mergedObj);
-      }
     },
   },
 });
