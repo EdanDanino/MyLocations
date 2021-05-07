@@ -64,7 +64,7 @@ const ViewLocation = () => {
           color="secondary"
           onClick={() => {
             dispatch(removeLocation(locationItem));
-            history.push("/Categories");
+            history.push("/Locations");
           }}
         >
           Delete
