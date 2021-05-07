@@ -60,7 +60,7 @@ const ViewLocation = () => {
           Return to list
         </StyledButton>
         <StyledButton
-          variant="contained"
+          variant="outlined"
           color="secondary"
           onClick={() => {
             dispatch(removeLocation(locationItem));
