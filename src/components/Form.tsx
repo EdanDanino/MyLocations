@@ -5,7 +5,7 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core";
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { categoryStateType } from "store/slices/types";
 import styled, { css } from "styled-components";
@@ -43,12 +43,11 @@ const StyledSelect = styled(Select)`
   ${FieldsCss}
 `;
 
-const StyledInpu = styled(Input)`
+const StyledInput = styled(Input)`
   ${FieldsCss}
 `;
 const Btn = styled(Button)`
   ${FieldsCss}
-  x
 `;
 
 const Column = styled.div`
@@ -65,6 +64,7 @@ const Form: FunctionComponent<FormTypes> = ({
 }) => {
   const { handleSubmit, control } = useForm();
   const [selectArray, setSelectArray] = useState<string[]>([]);
+
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSelectArray(event.target.value as string[]);
   };
@@ -79,6 +79,13 @@ const Form: FunctionComponent<FormTypes> = ({
   };
 
   type IntialValueKey = keyof typeof initialValues;
+
+  useEffect(() => {
+    if (initialValues) {
+      const cateogories: string = initialValues["category" as IntialValueKey];
+      setSelectArray(cateogories.split(","));
+    }
+  }, [initialValues]);
 
   return (
     <Container>
@@ -99,7 +106,6 @@ const Form: FunctionComponent<FormTypes> = ({
                         name={`${f.name}-Select`}
                         multiple
                         onChange={handleChange}
-                        defaultValue={f.options ? f?.options[0] : null}
                         id={`${f.name}-id`}
                         required
                       >
@@ -123,7 +129,7 @@ const Form: FunctionComponent<FormTypes> = ({
                       </StyledSelect>
                     </FormControl>
                   ) : (
-                    <StyledInpu
+                    <StyledInput
                       key={`${f.name}-${idx}`}
                       onChange={onChange}
                       defaultValue={
