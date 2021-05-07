@@ -46,6 +46,11 @@ export type FieldsType = {
   options?: categoryStateType[];
 };
 
+export type InformationTypes = {
+  fields: FieldsType[];
+  item: ListItemType;
+};
+
 export interface FormTypes {
   onSubmit: (data: {}) => void;
   fields: FieldsType[];

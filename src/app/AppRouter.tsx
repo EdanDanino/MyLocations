@@ -9,6 +9,8 @@ import {
   AddLocations,
   EditCategory,
   EditLocation,
+  ViewCategory,
+  ViewLocation,
   NotFound,
 } from "../pages";
 
@@ -22,9 +24,11 @@ const AppRouter = () => (
       <Route path="/Categories" exact component={Categories} />
       <Route path="/Categories/Add" exact component={AddCategories} />
       <Route path="/Categories/Edit/:id" component={EditCategory} />
+      <Route path="/Categories/View/:id" component={ViewCategory} />
       <Route path="/Locations" exact component={Locations} />
       <Route path="/Locations/Add" exact component={AddLocations} />
       <Route path="/Locations/Edit/:id" component={EditLocation} />
+      <Route path="/Locations/View/:id" component={ViewLocation} />
       <Route path="/" component={Dashboard} exact />
       <Route component={NotFound} />
     </Switch>
