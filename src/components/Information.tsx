@@ -48,7 +48,7 @@ const Information: FunctionComponent<InformationTypes> = ({ item }) => {
         <h3>{item.name}</h3>
         {ObjectKeys.map((key: keyof typeof item | string) => {
           return (
-            <ItemWrapper>
+            <ItemWrapper key={`${key} : ${item[key as keyof typeof item]}`}>
               <FieldWrapper>{`${key} : ${
                 item[key as keyof typeof item]
               }`}</FieldWrapper>
