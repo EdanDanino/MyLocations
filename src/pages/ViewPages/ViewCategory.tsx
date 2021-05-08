@@ -47,8 +47,6 @@ const ViewCategory = () => {
 
   const categoryItem = findPopulatedItem(categories, itemId);
 
-  console.log(categoryItem);
-
   return (
     <Root>
       <Information item={categoryItem as ListItemType} />

@@ -101,8 +101,6 @@ const Form: FunctionComponent<FormTypes> = ({
     }
   }, [hasSelect, initialValues]);
 
-  console.log(location);
-
   return (
     <Container>
       <Column>
